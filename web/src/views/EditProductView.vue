@@ -14,17 +14,15 @@ import CategorySelect from '../components/CategorySelect.vue'
 import ProductForm from '../components/ProductForm.vue'
 export default {
   components: { CategorySelect, ProductForm },
-  data() {
-    return {
-      name: '',
-      price: '',
-      description: '',
-      category: '',
+  data: () => ({
+    name: '',
+    price: '',
+    description: '',
+    category: '',
 
-      loading: true,
-      error: null
-    }
-  },
+    loading: true,
+    error: null
+  }),
   mounted() {
     this.fetchProduct()
   },

@@ -26,13 +26,16 @@ export default {
       required: true
     }
   },
+
   data: () => ({
     category: undefined,
     categories: []
   }),
+
   mounted() {
     this.fetchCategories()
   },
+
   methods: {
     async fetchCategories() {
       const categoriesResponse = await fetch('http://localhost:3000/category')
@@ -41,6 +44,7 @@ export default {
 
       this.category = this.modelValue
     },
+
     onChange() {
       this.$emit('update:modelValue', this.category)
     }

@@ -20,6 +20,7 @@
 
 <script>
 import CategorySelect from '../components/CategorySelect.vue'
+
 export default {
   name: 'ProductForm',
   props: {
@@ -31,20 +32,20 @@ export default {
 
   components: { CategorySelect },
 
-  data() {
-    return {
-      name: '',
-      price: '',
-      description: '',
-      category: 'teste'
-    }
-  },
+  data: () => ({
+    name: '',
+    price: '',
+    description: '',
+    category: 'teste'
+  }),
+
   mounted() {
     this.name = this.product.name
     this.price = this.product.price
     this.description = this.product.description
     this.category = this.product.category
   },
+
   methods: {
     async submitProduct() {
       const product = {
