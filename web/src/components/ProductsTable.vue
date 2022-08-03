@@ -10,7 +10,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="product in products" :key="product.id">
+      <tr
+        @click="
+          $router.push({ name: 'singleProduct', params: { id: product.id } })
+        "
+        v-for="product in products"
+        :key="product.id"
+      >
         <td>{{ product.name }}</td>
         <td>{{ product.price }}</td>
         <td>{{ product.description }}</td>
@@ -53,5 +59,11 @@ td {
 
 tr:nth-child(2n) {
   background-color: #e0e0e0;
+}
+
+tr:hover {
+  background-color: #0a0a0a;
+  color: white;
+  cursor: pointer;
 }
 </style>
