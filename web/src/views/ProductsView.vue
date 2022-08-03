@@ -52,6 +52,8 @@ export default {
       }
     },
     async onDelete(id) {
+      if (!confirm('Are you sure?')) return
+
       try {
         const deleteResponse = await fetch(
           `http://localhost:3000/product/${id}`,
