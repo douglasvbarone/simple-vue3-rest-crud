@@ -1,7 +1,12 @@
 <template>
   <div>
     <label for="category">Category: </label>
-    <select id="category" v-model="category" @change="onChange">
+    <select
+      v-if="categories.length > 0"
+      id="category"
+      v-model="category"
+      @change="onChange"
+    >
       <option
         v-for="(categoryOption, index) in categories"
         :key="index"
@@ -15,8 +20,14 @@
 
 <script>
 export default {
+  props: {
+    modelValue: {
+      type: String,
+      required: true
+    }
+  },
   data: () => ({
-    category: '',
+    category: undefined,
     categories: []
   }),
   mounted() {
@@ -27,6 +38,8 @@ export default {
       const categoriesResponse = await fetch('http://localhost:3000/category')
       const categories = await categoriesResponse.json()
       this.categories = categories
+
+      this.category = this.modelValue
     },
     onChange() {
       this.$emit('update:modelValue', this.category)

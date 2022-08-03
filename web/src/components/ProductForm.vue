@@ -36,18 +36,14 @@ export default {
       name: '',
       price: '',
       description: '',
-      category: ''
+      category: 'teste'
     }
   },
-  watch: {
-    product() {
-      if (this.product) {
-        this.name = this.product.name
-        this.price = this.product.price
-        this.description = this.product.description
-        this.category = this.product.category.name
-      }
-    }
+  mounted() {
+    this.name = this.product.name
+    this.price = this.product.price
+    this.description = this.product.description
+    this.category = this.product.category
   },
   methods: {
     async submitProduct() {

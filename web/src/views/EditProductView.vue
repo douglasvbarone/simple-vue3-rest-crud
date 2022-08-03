@@ -2,6 +2,7 @@
   <div>
     <h2>Edit product {{ name }}</h2>
     <product-form
+      v-if="!loading"
       @send="editProduct"
       :product="{ name, price, description, category }"
     />
@@ -20,6 +21,7 @@ export default {
       description: '',
       category: '',
 
+      loading: true,
       error: null
     }
   },
@@ -29,6 +31,7 @@ export default {
   methods: {
     async fetchProduct() {
       try {
+        this.loading = true
         const productResponse = await fetch(
           `http://localhost:3000/product/${this.$route.params.id}`
         )
@@ -41,15 +44,16 @@ export default {
         this.name = product.name
         this.price = product.price
         this.description = product.description
-        this.category = product.category
+        this.category = product.category.name
       } catch (e) {
         console.log(e)
         this.error = e
+      } finally {
+        this.loading = false
       }
     },
 
     async editProduct(product) {
-      console.log('editProduct', product)
       try {
         const newProductResponse = await fetch(
           `http://localhost:3000/product/${this.$route.params.id}`,
