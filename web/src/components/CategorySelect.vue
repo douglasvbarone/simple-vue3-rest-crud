@@ -1,13 +1,13 @@
 <template>
   <div>
-    <label for="category">Category</label>
+    <label for="category">Category: </label>
     <select id="category" v-model="category" @change="onChange">
       <option
-        v-for="(category, index) in categories"
+        v-for="(categoryOption, index) in categories"
         :key="index"
-        :value="category.name"
+        :value="categoryOption.name"
       >
-        {{ category.name }}
+        {{ categoryOption.name }}
       </option>
     </select>
   </div>

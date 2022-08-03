@@ -26,6 +26,13 @@ app.get('/product', async (req, res) => {
 app.post('/product', async (req, res) => {
   const { name, description, price, category } = req.body
 
+  if (!name || !price || !category) {
+    res.status(400).json({
+      error: 'Missing required fields'
+    })
+    return
+  }
+
   try {
     const product = await prisma.product.create({
       data: {
@@ -47,7 +54,8 @@ app.post('/product', async (req, res) => {
 
     res.json(product)
   } catch (e) {
-    res.status(500).json({ error: e.message })
+    console.log(e)
+    res.status(500).json({ error: e })
   }
 })
 

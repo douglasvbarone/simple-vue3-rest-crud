@@ -7,7 +7,11 @@
     <a class="btn secondary" @click="fetchProducts">Refresh</a>
     <div v-if="loading">Loading...</div>
     <div v-if="products.length">
-      <products-table :products="products" @delete="onDelete" />
+      <products-table
+        :products="products"
+        @delete="onDelete"
+        @edit="e => $router.push({ name: 'editProduct', params: { id: e } })"
+      />
     </div>
     <div v-if="error">Errors: {{ error }}</div>
   </div>

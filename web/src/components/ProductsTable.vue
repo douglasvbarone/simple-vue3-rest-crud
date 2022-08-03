@@ -16,9 +16,10 @@
         <td>{{ product.description }}</td>
         <td>{{ product.category.name }}</td>
         <td>
-          <a class="btn secondary" @click="$emit('delete', product.id)"
-            >Delete</a
-          >
+          <a class="btn secondary" @click="$emit('delete', product.id)">
+            Delete
+          </a>
+          <a class="btn secondary" @click="$emit('edit', product.id)"> Edit </a>
         </td>
       </tr>
     </tbody>
@@ -40,13 +41,16 @@ export default {
 table {
   width: 100%;
 }
+
 thead {
-  background-color: #111;
-  color: #fff;
+  background-color: #23262c;
+  color: #e6e6e6;
 }
+
 td {
   padding: 6px;
 }
+
 tr:nth-child(2n) {
   background-color: #e0e0e0;
 }

@@ -1,37 +1,16 @@
 <template>
   <div>
     <h2>Add product</h2>
-    <form @submit.prevent="addProduct">
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" v-model="name" />
-      </div>
-      <div class="form-group">
-        <label for="price">Price</label>
-        <input type="text" class="form-control" id="price" v-model="price" />
-      </div>
-      <div class="form-group">
-        <label for="description">Description</label>
-        <textarea
-          class="form-control"
-          id="description"
-          v-model="description"
-        ></textarea>
-
-        <category-select v-model="category" />
-      </div>
-      <button type="submit" class="btn primary">Add</button>
-    </form>
-    <div v-if="error">
-      {{ error }}
-    </div>
+    <product-form @send="addProduct" />
+    <div v-if="error">Errors: {{ error }}</div>
   </div>
 </template>
 
 <script>
 import CategorySelect from '../components/CategorySelect.vue'
+import ProductForm from '../components/ProductForm.vue'
 export default {
-  components: { CategorySelect },
+  components: { CategorySelect, ProductForm },
   data() {
     return {
       name: '',
@@ -42,16 +21,9 @@ export default {
       error: null
     }
   },
-  mounted() {},
-  methods: {
-    async addProduct() {
-      const product = {
-        name: this.name,
-        price: this.price,
-        description: this.description,
-        category: this.category
-      }
 
+  methods: {
+    async addProduct(product) {
       try {
         const newProductResponse = await fetch(
           'http://localhost:3000/product',
@@ -69,8 +41,9 @@ export default {
         }
 
         this.$router.push({ name: 'product' })
-      } catch ({ message }) {
-        this.error = message
+      } catch (e) {
+        console.log(e)
+        this.error = e
       }
     }
   }
