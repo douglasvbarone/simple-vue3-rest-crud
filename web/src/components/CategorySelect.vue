@@ -28,7 +28,7 @@ export default {
   },
 
   data: () => ({
-    category: undefined,
+    category: '',
     categories: []
   }),
 

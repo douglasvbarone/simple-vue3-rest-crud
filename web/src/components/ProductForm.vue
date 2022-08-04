@@ -36,14 +36,14 @@ export default {
     name: '',
     price: '',
     description: '',
-    category: 'teste'
+    category: ''
   }),
 
   mounted() {
-    this.name = this.product.name
-    this.price = this.product.price
-    this.description = this.product.description
-    this.category = this.product.category
+    this.name = this.product?.name
+    this.price = this.product?.price
+    this.description = this.product?.description
+    this.category = this.product?.category
   },
 
   methods: {
