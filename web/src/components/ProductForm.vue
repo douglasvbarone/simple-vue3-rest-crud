@@ -6,7 +6,13 @@
     </div>
     <div class="form-group">
       <label for="price">Price:</label>
-      <input type="text" class="form-control" id="price" v-model="price" />
+      <input
+        v-maska="'#*'"
+        type="text"
+        class="form-control"
+        id="price"
+        v-model="price"
+      />
     </div>
     <div class="form-group">
       <label for="description">Description:</label>
