@@ -116,6 +116,26 @@ app.get('/category', async (req, res) => {
   res.json(categories)
 })
 
+// Category create
+app.post('/category', async (req, res) => {
+  const { name } = req.body
+
+  if (!name) {
+    res.status(400).json({
+      error: 'Missing required fields'
+    })
+    return
+  }
+
+  const category = await prisma.category.create({
+    data: {
+      name
+    }
+  })
+
+  res.json(category)
+})
+
 // 404
 app.get('*', (req, res) => {
   res.status(404).json({

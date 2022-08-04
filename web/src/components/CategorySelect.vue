@@ -15,6 +15,7 @@
         {{ categoryOption.name }}
       </option>
     </select>
+    <button @click.prevent="addCategory">+ New</button>
   </div>
 </template>
 
@@ -47,6 +48,29 @@ export default {
 
     onChange() {
       this.$emit('update:modelValue', this.category)
+    },
+
+    async addCategory() {
+      const newCategory = prompt('New category name:')
+
+      if (newCategory) {
+        const categoryResponse = await fetch('http://localhost:3000/category', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            name: newCategory
+          })
+        })
+
+        const category = await categoryResponse.json()
+
+        await this.fetchCategories()
+
+        this.category = category.name
+        this.$emit('update:modelValue', this.category)
+      }
     }
   }
 }
